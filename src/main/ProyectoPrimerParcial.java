@@ -1,8 +1,9 @@
 package main;
 
-import Arreglos.AplicacionArreglo;
 import Arreglos.Arreglo;
-import java.io.IOException;
+import Ordenamiento.Ordenamiento;
+import Recursividad_Iteracion.RecursividadIteracion;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -61,6 +62,8 @@ public class ProyectoPrimerParcial {
 
             case 0:
                 System.out.println("Saliendo del programa...");
+                sc.close();
+                System.exit(0);
                 break;
 
             default:
@@ -80,11 +83,23 @@ public class ProyectoPrimerParcial {
     }
 
     private static void ejecutarRecursividadEIteracion() {
-        System.out.println("Opcion 2 - Recursividad e Iteracion");
+        RecursividadIteracion recursividadIteracion = new RecursividadIteracion();
+
+        boolean retornar = recursividadIteracion.principal();
+        System.out.println("retornar" + retornar);
+        if (retornar) {
+            ejecucionGeneral();
+        }
     }
 
     private static void ejecutarOrdenamiento() {
-        System.out.println("Opcion 3 - Ordenamiento");
+        Ordenamiento ordenamiento = new Ordenamiento();
+
+        boolean retornar = ordenamiento.principal();
+        System.out.println("retornar" + retornar);
+        if (retornar) {
+            ejecucionGeneral();
+        }
     }
 
     private static void ejecutarBusqueda() {
