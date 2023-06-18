@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Ordenamiento;
 
 import java.util.Scanner;
 
 /**
  *
- * @author danny
+ * author danny
  */
 public class AplicacionOrdenamiento {
   private Scanner scanner;
@@ -23,7 +19,7 @@ public class AplicacionOrdenamiento {
     int[] lista = new int[cantidad];
 
     for (int i = 0; i < cantidad; i++) {
-      System.out.print("Ingrese el valor n° " + (i + 1) + ":");
+      System.out.print("Ingrese el valor n " + (i + 1) + ":");
       int valor = scanner.nextInt();
       lista[i] = valor;
     }

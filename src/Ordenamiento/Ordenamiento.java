@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Ordenamiento;
 
 import java.util.Scanner;
@@ -11,7 +7,7 @@ import main.ClaseGenerica;
 
 /**
  *
- * @author danny
+ * author danny
  */
 public class Ordenamiento {
   private static Scanner scanner = new Scanner(System.in);
@@ -55,7 +51,7 @@ public class Ordenamiento {
           break;
 
         default:
-          System.out.println("Opción inválida. Intente nuevamente.");
+          System.out.println("Opcion invalida. Intente nuevamente.");
           break;
       }
 
@@ -68,17 +64,17 @@ public class Ordenamiento {
   }
 
   private static void mostrarMenu() {
-    System.out.println("Seleccione una opción:");
-    System.out.println("1. Definición");
+    System.out.println("Seleccione una opcion:");
+    System.out.println("1. Definicion");
     System.out.println("2. Algoritmo");
     System.out.println("3. Prueba de escritorio");
-    System.out.println("4. Descripción del programa");
-    System.out.println("5. Aplicación");
+    System.out.println("4. Descripcion del programa");
+    System.out.println("5. Aplicacion");
     System.out.println("0. Retornar");
   }
 
   private static int leerOpcion() {
-    System.out.print("Opción: ");
+    System.out.print("Opcion: ");
     return scanner.nextInt();
   }
 
@@ -108,15 +104,15 @@ public class Ordenamiento {
 
   private void seteoData() {
     ordenamiento.setDefinicion(
-        "Es el proceso de reorganizar elementos de una colección en un orden especifíco. El objetivo principal es establecer una secuencia ordenada que permita acceder, buscar y manipular los elementos de manera eficiente.");
+        "Es el proceso de reorganizar elementos de una coleccion en un orden especifico. El objetivo principal es establecer una secuencia ordenada que permita acceder, buscar y manipular los elementos de manera eficiente.");
     ordenamiento.setAlgoritmo("El algoritmo de ordenamiento burbuja se puede describir en los siguientes pasos:\n"
         + "\n"
-        + "1. Declaración de la colección a ordenar.\n"
-        + "2. Declarar bucle: el bucle se ejecutará n-1 veces, donde n es la cantidad de elementos de la colección.\n"
-        + "3. Declarar un bucle interno: dentro del bucle anterior declararemos otro bucle este se ejecutara desde el primer elemento hasta el penúltimo elemento de la colección.\n"
-        + "4. Comparación de elementos: dentro del bucle interno debemos comparar el elemento actual con el siguiente elemento adyacente, si el elemento actual es mayor intercambiamos sus posiciones.\n"
-        + "5. Una vez terminada una pasada el elemento mas grande debera estar al final de la colección.\n"
-        + "6. Esto se repetirá las veces especificadas y al final la colección estará ordenada.\n");
+        + "1. Declaracion de la coleccion a ordenar.\n"
+        + "2. Declarar bucle: el bucle se ejecutara n-1 veces, donde n es la cantidad de elementos de la coleccion.\n"
+        + "3. Declarar un bucle interno: dentro del bucle anterior declararemos otro bucle este se ejecutara desde el primer elemento hasta el penultimo elemento de la coleccion.\n"
+        + "4. Comparacion de elementos: dentro del bucle interno debemos comparar el elemento actual con el siguiente elemento adyacente, si el elemento actual es mayor intercambiamos sus posiciones.\n"
+        + "5. Una vez terminada una pasada el elemento mas grande debera estar al final de la coleccion.\n"
+        + "6. Esto se repetira las veces especificadas y al final la coleccion estara ordenada.\n");
     ordenamiento.setDescripcionPrograma(
         "El programa permite ordenar una lista de numeros /n");
     AplicacionOrdenamiento aplicacion = new AplicacionOrdenamiento();
