@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Recursividad_Iteracion.AplicacionRecursividadIteracion;
 import main.ClaseGenerica;
+import main.ProyectoPrimerParcial;
 
 /**
  *
@@ -17,8 +18,7 @@ public class Ordenamiento {
     seteoData();
   }
 
-  public boolean principal() {
-    boolean retornar = false;
+  public void principal() {
 
     int opcion;
     do {
@@ -47,7 +47,7 @@ public class Ordenamiento {
           break;
 
         case 0:
-          retornar = retornar();
+          ProyectoPrimerParcial.ejecucionGeneral();
           break;
 
         default:
@@ -59,8 +59,6 @@ public class Ordenamiento {
     } while (opcion != 0);
 
     scanner.close();
-
-    return retornar;
   }
 
   private static void mostrarMenu() {
