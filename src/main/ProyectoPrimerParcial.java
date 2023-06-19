@@ -15,7 +15,7 @@ public class ProyectoPrimerParcial {
         ejecucionGeneral();
     }
 
-    private static void ejecucionGeneral() {
+    public static void ejecucionGeneral() {
         try {
             int opcion;
             mostrarMenu();
@@ -95,11 +95,7 @@ public class ProyectoPrimerParcial {
     private static void ejecutarOrdenamiento() {
         Ordenamiento ordenamiento = new Ordenamiento();
 
-        boolean retornar = ordenamiento.principal();
-        System.out.println("retornar" + retornar);
-        if (retornar) {
-            ejecucionGeneral();
-        }
+        ordenamiento.principal();
     }
 
     private static void ejecutarBusqueda() {
