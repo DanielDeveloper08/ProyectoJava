@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Recursividad_Iteracion;
 
 import java.util.Scanner;
 
 /**
  *
- * @author danny
+ * author danny
  */
 public class AplicacionRecursividadIteracion {
   private Scanner scanner;
