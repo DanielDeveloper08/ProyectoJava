@@ -1,183 +1,79 @@
 package Busqueda;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-
 public class AplicacionBusqueda {
-    
-    private int[] numeros;
-    private int tamaño;
-    private Scanner scanner;
+    public void ejecutar() {
+        Scanner scanner = new Scanner(System.in);
 
-    public AplicacionBusqueda(int capacidad) {
-        numeros = new int[capacidad];
-        tamaño = 0;
-        scanner = new Scanner(System.in);
-    }
+        List<String> peliculas = new ArrayList<>();
+        peliculas.add("El Padrino");
+        peliculas.add("Pulp Fiction");
+        peliculas.add("El Senor de los Anillos");
+        peliculas.add("La La Land");
+        peliculas.add("Titanic");
+        
+        System.out.println("\n***********************************\n");
+        System.out.println("Lista de peliculas: " + peliculas);
 
-    public void insertarNumero() {
-        if (tamaño < numeros.length) {
-            System.out.println("Ingrese un número:");
-            int numero = scanner.nextInt();
-            numeros[tamaño] = numero;
-            tamaño++;
-            System.out.println("Número agregado con éxito.");
+        // Solicitar la pelicula a buscar
+        System.out.print("Ingrese el nombre de la pelicula a buscar: ");
+        String peliculaBuscada = scanner.nextLine();
+
+        // Solicitar el metodo de busqueda
+        System.out.print("Seleccione el metodo de busqueda (1: Secuencial, 2: Binaria): ");
+        int metodo = scanner.nextInt();
+
+        int resultado = -1; // Variable para almacenar el resultado de la busqueda
+
+        switch (metodo) {
+            case 1:
+                resultado = busquedaSecuencial(peliculas, peliculaBuscada);
+                break;
+            case 2:
+                resultado = busquedaBinaria(peliculas, peliculaBuscada);
+                break;
+            default:
+                System.out.println("Opcion invalida. El metodo de busqueda seleccionado no es valido.\n");
+        }
+
+        if (resultado == -1) {
+            System.out.println("\nLa pelicula '" + peliculaBuscada + "' no se encuentra en la lista.\n");
         } else {
-            System.out.println("No se pueden agregar más números. El arreglo está lleno.");
+            System.out.println("\nLa pelicula '" + peliculaBuscada + "' se encuentra en la posicion " + resultado + ".\n");
         }
     }
 
-    public void mostrarNumeros() {
-        System.out.println("Lista de números:");
-        for (int i = 0; i < tamaño; i++) {
-            System.out.println((i + 1) + ". " + numeros[i]);
-        }
-    }
-
-    public void eliminarNumero() {
-        System.out.println("Ingrese la posición del número a eliminar:");
-        int posicionEliminar = scanner.nextInt();
-        scanner.nextLine();
-        posicionEliminar = posicionEliminar - 1;
-        if (posicionEliminar >= 0 && posicionEliminar < tamaño) {
-            for (int i = posicionEliminar; i < tamaño - 1; i++) {
-                numeros[i] = numeros[i + 1];
-            }
-            tamaño--;
-            System.out.println("Número eliminado con éxito.");
-        } else {
-            System.out.println("Posición inválida. No se pudo eliminar el número.");
-        }
-    }
-
-    public void ordenarBurbuja() {
-        for (int i = 0; i < tamaño - 1; i++) {
-            for (int j = 0; j < tamaño - i - 1; j++) {
-                if (numeros[j] > numeros[j + 1]) {
-                    int temp = numeros[j];
-                    numeros[j] = numeros[j + 1];
-                    numeros[j + 1] = temp;
-                }
+    // Metodo de busqueda secuencial
+    public static int busquedaSecuencial(List<String> lista, String elemento) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).equalsIgnoreCase(elemento)) {
+                return i;
             }
         }
-        System.out.println("Arreglo ordenado por burbuja: " + Arrays.toString(numeros));
+        return -1; // Elemento no encontrado
     }
 
-    public void ordenarSeleccion() {
-        for (int i = 0; i < tamaño - 1; i++) {
-            int indiceMinimo = i;
-            for (int j = i + 1; j < tamaño; j++) {
-                if (numeros[j] < numeros[indiceMinimo]) {
-                    indiceMinimo = j;
-                }
-            }
-            int temp = numeros[indiceMinimo];
-            numeros[indiceMinimo] = numeros[i];
-            numeros[i] = temp;
-        }
-        System.out.println("Arreglo ordenado por selección: " + Arrays.toString(numeros));
-    }
+    // Metodo de busqueda binaria
+    public static int busquedaBinaria(List<String> lista, String elemento) {
+        int inicio = 0;
+        int fin = lista.size() - 1;
 
-    public void ordenarInsercion() {
-        for (int i = 1; i < tamaño; i++) {
-            int valorActual = numeros[i];
-            int j = i - 1;
-            while (j >= 0 && numeros[j] > valorActual) {
-                numeros[j + 1] = numeros[j];
-                j--;
-            }
-            numeros[j + 1] = valorActual;
-        }
-        System.out.println("Arreglo ordenado por inserción: " + Arrays.toString(numeros));
-    }
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
 
-    public void ordenarQuicksort(int inicio, int fin) {
-        if (inicio < fin) {
-            int indicePivote = particionar(inicio, fin);
-            ordenarQuicksort(inicio, indicePivote - 1);
-            ordenarQuicksort(indicePivote + 1, fin);
-        }
-    }
-
-    private int particionar(int inicio, int fin) {
-        int pivote = numeros[fin];
-        int i = inicio - 1;
-        for (int j = inicio; j < fin; j++) {
-            if (numeros[j] <= pivote) {
-                i++;
-                int temp = numeros[i];
-                numeros[i] = numeros[j];
-                numeros[j] = temp;
+            int comparacion = lista.get(medio).compareToIgnoreCase(elemento);
+            if (comparacion == 0) {
+                return medio;
+            } else if (comparacion < 0) {
+                inicio = medio + 1;
+            } else {
+                fin = medio - 1;
             }
         }
-        int temp = numeros[i + 1];
-        numeros[i + 1] = numeros[fin];
-        numeros[fin] = temp;
-        return i + 1;
-    }
 
-    public boolean retornar() {
-        return true;
-    }
-
-    public boolean ejecutar() {
-        boolean retornar = false;
-        int opcion;
-        do {
-            System.out.println("Seleccione una opción:");
-            System.out.println("1. Insertar número");
-            System.out.println("2. Mostrar números");
-            System.out.println("3. Eliminar número");
-            System.out.println("4. Ordenar por burbuja");
-            System.out.println("5. Ordenar por selección");
-            System.out.println("6. Ordenar por inserción");
-            System.out.println("7. Ordenar por Quicksort");
-            System.out.println("0. Retornar");
-
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
-
-            switch (opcion) {
-                case 1:
-                    insertarNumero();
-                    break;
-
-                case 2:
-                    mostrarNumeros();
-                    break;
-
-                case 3:
-                    eliminarNumero();
-                    break;
-
-                case 4:
-                    ordenarBurbuja();
-                    break;
-
-                case 5:
-                    ordenarSeleccion();
-                    break;
-
-                case 6:
-                    ordenarInsercion();
-                    break;
-
-                case 7:
-                    ordenarQuicksort(0, tamaño - 1);
-                    System.out.println("Arreglo ordenado por Quicksort: " + Arrays.toString(numeros));
-                    break;
-
-                case 0:
-                    retornar = retornar();
-
-                default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
-                    break;
-            }
-
-            System.out.println();
-        } while (opcion != 0);
-        return retornar;
+        return -1; // Elemento no encontrado
     }
 }

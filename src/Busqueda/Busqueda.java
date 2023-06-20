@@ -1,12 +1,14 @@
-
 package Busqueda;
 
 import Arreglos.AplicacionArreglo;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import main.ClaseGenerica;
+import main.ProyectoPrimerParcial;
 
 public class Busqueda {
-    
+
     private static Scanner scanner = new Scanner(System.in);
     ClaseGenerica busqueda = new ClaseGenerica();
 
@@ -14,13 +16,14 @@ public class Busqueda {
         seteoData();
     }
 
-    public boolean principal() {
-        boolean retornar = false;
-
+    public void principal() {
         int opcion;
+        boolean opcionValida;
+
         do {
             mostrarMenu();
             opcion = leerOpcion();
+            opcionValida = true;
 
             switch (opcion) {
                 case 1:
@@ -44,35 +47,46 @@ public class Busqueda {
                     break;
 
                 case 0:
-                    retornar = retornar();
+                    ProyectoPrimerParcial.ejecucionGeneral();
                     break;
 
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
+                    System.out.println("Opcion invalida. Intente nuevamente.");
+                    opcionValida = false;
                     break;
             }
 
             System.out.println();
-        } while (opcion != 0);
+        } while (opcion != 0 || !opcionValida);
 
         scanner.close();
-
-        return retornar;
     }
 
     private static void mostrarMenu() {
-        System.out.println("Seleccione una opción:");
-        System.out.println("1. Definición");
+        System.out.println("========================================");
+        System.out.println("           MENU DE OPCIONES             ");
+        System.out.println("               BUSQUEDA                 ");
+        System.out.println("========================================");
+        System.out.println("Seleccione una opcion:");
+        System.out.println("1. Definicion");
         System.out.println("2. Algoritmo");
         System.out.println("3. Prueba de escritorio");
-        System.out.println("4. Descripción del programa");
-        System.out.println("5. Aplicación");
+        System.out.println("4. Descripcion del programa");
+        System.out.println("5. Aplicacion");
         System.out.println("0. Retornar");
+        System.out.println("----------------------------------------");
     }
 
     private static int leerOpcion() {
-        System.out.print("Opción: ");
-        return scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Opcion: ");
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: entrada invalida. Intente nuevamente.");
+                scanner.nextLine();
+            }
+        }
     }
 
     private void mostrarDefinicion() {
@@ -93,69 +107,58 @@ public class Busqueda {
 
     private void mostrarAplicacion() {
         AplicacionBusqueda app = (AplicacionBusqueda) busqueda.getAplicacion();
-        /*boolean retornar = app.ejecutar();
-        if (retornar) {
-            principal();
-        }*/
+        app.ejecutar();
     }
 
     private void seteoData() {
-        busqueda.setDefinicion(
-        "Concepto de Ordenamiento:\n" +
-        "El ordenamiento es un proceso que permite organizar los elementos de una colección de datos en un cierto criterio predefinido. " +
-        "El objetivo principal del ordenamiento es obtener una disposición de los elementos de manera ascendente o descendente, " +
-        "lo que facilita su búsqueda, recuperación y realización de operaciones sobre ellos.\n" +
-        "\n" +
-        "Tipos de Ordenamiento:\n" +
-        "1. Ordenamiento por intercambio directo (burbuja):\n" +
-        "- Consiste en comparar pares de elementos adyacentes y realizar intercambios si están en el orden incorrecto.\n" +
-        "- Repite este proceso hasta que todos los elementos estén ordenados.\n" +
-        "\n" +
-        "2. Ordenamiento por selección:\n" +
-        "- Selecciona repetidamente el elemento más pequeño (o más grande) y lo coloca en su posición correcta.\n" +
-        "- Se va construyendo una sublista ordenada desde el principio hasta el final del arreglo.\n" +
-        "\n" +
-        "3. Ordenamiento por inserción:\n" +
-        "- Recorre el arreglo desde el segundo elemento y lo compara con los elementos anteriores.\n" +
-        "- Si encuentra un elemento menor, lo desplaza hacia la derecha hasta encontrar su posición correcta.\n" +
-        "\n" +
-        "4. Ordenamiento por Quicksort:\n" +
-        "- Divide el arreglo en subarreglos más pequeños basados en un elemento llamado 'pivote'.\n" +
-        "- Luego, reorganiza los elementos de manera que los elementos más pequeños que el pivote estén a su izquierda, y los elementos más grandes estén a su derecha.\n" +
-        "- Repite este proceso recursivamente para los subarreglos hasta que todo el arreglo esté ordenado.");
-        
-        
-        busqueda.setAlgoritmo("Algoritmo de ordenamiento por intercambio directo (burbuja):\n" +
-        "1. Compara pares de elementos adyacentes.\n" +
-        "2. Si están en el orden incorrecto, los intercambia.\n" +
-        "3. Repite este proceso hasta que todos los elementos estén ordenados.\n" +
-        "\n" +
-        "Algoritmo de ordenamiento por selección:\n" +
-        "1. Encuentra el elemento más pequeño (o más grande) en la lista.\n" +
-        "2. Lo coloca en la posición correcta.\n" +
-        "3. Repite este proceso para el resto de elementos, ubicándolos en la sublista ordenada.\n" +
-        "\n" +
-        "Algoritmo de ordenamiento por inserción:\n" +
-        "1. Recorre el arreglo desde el segundo elemento.\n" +
-        "2. Compara el elemento actual con los elementos anteriores.\n" +
-        "3. Si encuentra un elemento menor, lo desplaza hacia la derecha hasta encontrar su posición correcta.\n" +
-        "4. Repite este proceso hasta que todos los elementos estén en su posición correcta.\n" +
-        "\n" +
-        "Algoritmo de ordenamiento por Quicksort:\n" +
-        "1. Elige un elemento pivote del arreglo.\n" +
-        "2. Reorganiza los elementos de manera que los menores que el pivote estén a su izquierda y los mayores estén a su derecha.\n" +
-        "3. Aplica recursivamente este proceso a las sublistas de elementos menores y mayores que el pivote.\n" +
-        "4. Combina las sublistas ordenadas para obtener el arreglo ordenado final.");
-        
-        busqueda.setDescripcionPrograma(
-                "El programa permite agregar nombres de mascotas, dandonos la opcion de consultar mascotas /n"
-                        + "eliminar mascotas y actualizar.");
-        AplicacionArreglo aplicacion = new AplicacionArreglo(5);
+        busqueda.setDefinicion("\n*******************************************************\n"
+                + "\nINFORMACION DE BUSQUEDA Y TIPOS DE BUSQUEDA\n"
+                + "-------------------------------------------\n"
+                + "La busqueda es un proceso utilizado para encontrar la presencia y ubicacion de un elemento especifico dentro de un conjunto de datos.\n"
+                + "\n"
+                + "TIPO DE BUSQUEDA SECUENCIAL\n"
+                + "---------------------------\n"
+                + "La busqueda secuencial, tambien conocida como busqueda lineal, consiste en recorrer secuencialmente cada elemento del conjunto de datos hasta encontrar el elemento buscado.\n"
+                + "Si el elemento es encontrado, se devuelve su posicion o indice en el conjunto de datos. Si el elemento no se encuentra, se devuelve un valor especial indicando la ausencia.\n"
+                + "\n"
+                + "TIPO DE BUSQUEDA BINARIA\n"
+                + "-------------------------\n"
+                + "La busqueda binaria es un algoritmo eficiente utilizado para buscar un elemento en un conjunto de datos ordenados de forma ascendente o descendente.\n"
+                + "Este algoritmo divide repetidamente el conjunto de datos a la mitad, comparando el elemento buscado con el elemento central.\n"
+                + "Si el elemento central es igual al elemento buscado, se devuelve su posicion. Si el elemento central es mayor o menor al elemento buscado, la busqueda continua en la mitad correspondiente del conjunto de datos.\n"
+                + "Este proceso se repite hasta encontrar el elemento buscado o determinar que no esta presente en el conjunto de datos.");
+
+        busqueda.setAlgoritmo("\n*******************************************************\n "
+                + "\nBusqueda Secuencial:\n"
+                + "1. Recorrer cada elemento del arreglo uno por uno.\n"
+                + "2. Comparar el elemento actual con el elemento buscado.\n"
+                + "3. Si los elementos coinciden, se ha encontrado el elemento buscado.\n"
+                + "   - Devolver la posicion actual del elemento (indice).\n"
+                + "4. Si se ha recorrido todo el arreglo sin encontrar el elemento, el elemento no esta presente.\n"
+                + "   - Devolver un valor especial (por ejemplo, -1) para indicar que no se encontro el elemento.\n\n"
+                + "Busqueda Binaria (en un arreglo ordenado de forma ascendente o descendente):\n"
+                + "1. Establecer el inicio y el fin del intervalo de busqueda.\n"
+                + "   - Inicio = 0, Fin = longitud del arreglo - 1.\n"
+                + "2. Mientras el inicio sea menor o igual al fin:\n"
+                + "   - Calcular el punto medio del intervalo: Medio = (Inicio + Fin) / 2.\n"
+                + "3. Comparar el elemento medio del intervalo con el elemento buscado.\n"
+                + "4. Si los elementos coinciden, se ha encontrado el elemento buscado.\n"
+                + "   - Devolver la posicion del elemento medio.\n"
+                + "5. Si el elemento medio es menor que el elemento buscado:\n"
+                + "   - El elemento esta en la mitad superior del intervalo.\n"
+                + "     - Actualizar el inicio del intervalo: Inicio = Medio + 1.\n"
+                + "6. Si el elemento medio es mayor que el elemento buscado:\n"
+                + "   - El elemento esta en la mitad inferior del intervalo.\n"
+                + "     - Actualizar el fin del intervalo: Fin = Medio - 1.\n"
+                + "7. Repetir los pasos 2 a 6 hasta que el elemento sea encontrado o el intervalo se reduzca a cero.\n"
+                + "8. Si se ha recorrido todo el intervalo sin encontrar el elemento, el elemento no esta presente.\n"
+                + "   - Devolver un valor especial (por ejemplo, -1) para indicar que no se encontro el elemento.");
+
+        busqueda.setDescripcionPrograma("\n ===== DESCRIPCION DEL PROGRAMA =====\n"
+                + "El programa permite realizar la busqueda de una pelicula, \n"
+                + "seleccionando el tipo de busqueda que queremos realizar(Secuencial o Binaria)");
+
+        AplicacionBusqueda aplicacion = new AplicacionBusqueda();
         busqueda.setAplicacion(aplicacion);
     }
-
-    public boolean retornar() {
-        return true;
-    }
-
 }
