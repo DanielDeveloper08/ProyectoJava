@@ -1,7 +1,9 @@
 package Arreglos;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import main.ClaseGenerica;
+import main.ProyectoPrimerParcial;
 
 public class Arreglo {
 
@@ -12,13 +14,14 @@ public class Arreglo {
         seteoData();
     }
 
-    public boolean principal() {
-        boolean retornar = false;
-
+    public void principal() {
         int opcion;
+        boolean opcionValida;
+
         do {
             mostrarMenu();
             opcion = leerOpcion();
+            opcionValida = true;
 
             switch (opcion) {
                 case 1:
@@ -42,35 +45,46 @@ public class Arreglo {
                     break;
 
                 case 0:
-                    retornar = retornar();
+                    ProyectoPrimerParcial.ejecucionGeneral();
                     break;
 
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
+                    System.out.println("Opcion invalida. Intente nuevamente.");
+                    opcionValida = false;
                     break;
             }
 
             System.out.println();
-        } while (opcion != 0);
+        } while (opcion != 0 || !opcionValida);
 
         scanner.close();
-
-        return retornar;
     }
 
     private static void mostrarMenu() {
-        System.out.println("Seleccione una opción:");
-        System.out.println("1. Definición");
+        System.out.println("========================================");
+        System.out.println("           MENU DE OPCIONES             ");
+        System.out.println("               ARREGLOS                 ");
+        System.out.println("========================================");
+        System.out.println("Seleccione una opcion:");
+        System.out.println("1. Definicion");
         System.out.println("2. Algoritmo");
         System.out.println("3. Prueba de escritorio");
-        System.out.println("4. Descripción del programa");
-        System.out.println("5. Aplicación");
+        System.out.println("4. Descripcion del programa");
+        System.out.println("5. Aplicacion");
         System.out.println("0. Retornar");
+        System.out.println("----------------------------------------");
     }
 
     private static int leerOpcion() {
-        System.out.print("Opción: ");
-        return scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Opcion: ");
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: entrada invalida. Intente nuevamente.");
+                scanner.nextLine();
+            }
+        }
     }
 
     private void mostrarDefinicion() {
@@ -82,7 +96,8 @@ public class Arreglo {
     }
 
     private void mostrarPruebaDeEscritorio() {
-        // AGRGEAR
+        PruebaEscritorioArreglo app = (PruebaEscritorioArreglo) arreglo.getPruebaEscritorio();
+        app.ejecutarPrueba();
     }
 
     private void mostrarDescripcionDelPrograma() {
@@ -111,15 +126,15 @@ public class Arreglo {
                 + "7. Eliminación de elementos: Se pueden eliminar elementos del arreglo, desplazando los elementos restantes para llenar el espacio vacío.\n"
                 + "8. Consulta de elementos: Se pueden consultar los valores de los elementos individuales del arreglo.\n"
                 + "9. Actualización de elementos: Se pueden actualizar los valores de los elementos del arreglo mediante asignación directa.");
+        
+        PruebaEscritorioArreglo pruebaEscritorio = new PruebaEscritorioArreglo();
+        arreglo.setPruebaEscritorio(pruebaEscritorio);
+        
         arreglo.setDescripcionPrograma(
-                "El programa permite agregar nombres de mascotas, dandonos la opcion de consultar mascotas /n"
-                        + "eliminar mascotas y actualizar.");
+                "\n ===== DESCRIPCION DEL PROGRAMA =====\n"
+                + "El programa permite agregar nombres de mascotas, dandonos la opcion de consultar mascotas /n"
+                + "eliminar mascotas y actualizar.");
         AplicacionArreglo aplicacion = new AplicacionArreglo(5);
         arreglo.setAplicacion(aplicacion);
     }
-
-    public boolean retornar() {
-        return true;
-    }
-
 }

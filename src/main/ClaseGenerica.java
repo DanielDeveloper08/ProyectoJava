@@ -4,11 +4,11 @@ package main;
 public class ClaseGenerica<T> {
      private String definicion;
     private String algoritmo;
-    private String pruebaEscritorio;
+    private T pruebaEscritorio;
     private String descripcionPrograma;
     private T aplicacion;
 
-    public ClaseGenerica(String definicion, String algoritmo, String pruebaEscritorio, String descripcionPrograma, T aplicacion) {
+    public ClaseGenerica(String definicion, String algoritmo, T pruebaEscritorio, String descripcionPrograma, T aplicacion) {
         this.definicion = definicion;
         this.algoritmo = algoritmo;
         this.pruebaEscritorio = pruebaEscritorio;
@@ -34,11 +34,11 @@ public class ClaseGenerica<T> {
         this.algoritmo = algoritmo;
     }
 
-    public String getPruebaEscritorio() {
+    public T getPruebaEscritorio() {
         return pruebaEscritorio;
     }
 
-    public void setPruebaEscritorio(String pruebaEscritorio) {
+    public void setPruebaEscritorio(T pruebaEscritorio) {
         this.pruebaEscritorio = pruebaEscritorio;
     }
 

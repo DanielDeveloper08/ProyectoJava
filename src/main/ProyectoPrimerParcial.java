@@ -1,6 +1,7 @@
 package main;
 
 import Arreglos.Arreglo;
+import Busqueda.Busqueda;
 import Ordenamiento.Ordenamiento;
 import Recursividad_Iteracion.RecursividadIteracion;
 
@@ -29,77 +30,87 @@ public class ProyectoPrimerParcial {
     }
 
     private static void mostrarMenu() {
-        System.out.println("Seleccione una opcion:");
-        System.out.println("1. Arreglos");
-        System.out.println("2. Recursividad e Iteracion");
-        System.out.println("3. Ordenamiento");
-        System.out.println("4. Busqueda");
-        System.out.println("0. Salir");
+        System.out.println("================================");
+        System.out.println("|        Menu de opciones       |");
+        System.out.println("================================");
+        System.out.println("|   1. Arreglos                 |");
+        System.out.println("|   2. Recursividad e Iteracion |");
+        System.out.println("|   3. Ordenamiento             |");
+        System.out.println("|   4. Busqueda                 |");
+        System.out.println("|   0. Salir                    |");
+        System.out.println("================================");
+
     }
 
     private static int leerOpcion() {
-        System.out.print("Opcion: ");
-        return sc.nextInt();
+        while (true) {
+            try {
+                System.out.print("Opcion: ");
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: entrada invalida. Intente nuevamente.");
+                sc.nextLine();
+            }
+        }
     }
 
     private static void ejecutarOpcion(int opcion) {
-        switch (opcion) {
-            case 1:
-                ejecutarArreglos();
-                break;
+        boolean opcionValida = false;
 
-            case 2:
-                ejecutarRecursividadEIteracion();
-                break;
+        while (!opcionValida) {
+            switch (opcion) {
+                case 1:
+                    ejecutarArreglos();
+                    opcionValida = true;
+                    break;
 
-            case 3:
-                ejecutarOrdenamiento();
-                break;
+                case 2:
+                    ejecutarRecursividadEIteracion();
+                    opcionValida = true;
+                    break;
 
-            case 4:
-                ejecutarBusqueda();
-                break;
+                case 3:
+                    ejecutarOrdenamiento();
+                    opcionValida = true;
+                    break;
 
-            case 0:
-                System.out.println("Saliendo del programa...");
-                sc.close();
-                System.exit(0);
-                break;
+                case 4:
+                    ejecutarBusqueda();
+                    opcionValida = true;
+                    break;
 
-            default:
-                System.out.println("Opcion invalida. Intente nuevamente.");
-                break;
+                case 0:
+                    System.out.println("Saliendo del programa...");
+                    sc.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Opcion invalida. Intente nuevamente.");
+                    opcion = leerOpcion();
+                    break;
+            }
         }
     }
 
     private static void ejecutarArreglos() {
         Arreglo arreglo = new Arreglo();
-
-        boolean retornar = arreglo.principal();
-        System.out.println("retornar" + retornar);
-        if (retornar) {
-            ejecucionGeneral();
-        }
+        arreglo.principal();
     }
 
     private static void ejecutarRecursividadEIteracion() {
         RecursividadIteracion recursividadIteracion = new RecursividadIteracion();
-
-        boolean retornar = recursividadIteracion.principal();
-        System.out.println("retornar" + retornar);
-        if (retornar) {
-            ejecucionGeneral();
-        }
+        recursividadIteracion.principal();
     }
 
     private static void ejecutarOrdenamiento() {
         Ordenamiento ordenamiento = new Ordenamiento();
-
         ordenamiento.principal();
     }
 
     private static void ejecutarBusqueda() {
-        System.out.println("Opcion 4 - Busqueda");
+        Busqueda busqueda = new Busqueda();
+        busqueda.principal();
     }
 
 }
