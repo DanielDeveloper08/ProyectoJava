@@ -98,7 +98,8 @@ public class Busqueda {
     }
 
     private void mostrarPruebaDeEscritorio() {
-        // AGRGEAR
+        PruebaEscritorioBusqueda app = (PruebaEscritorioBusqueda) busqueda.getPruebaEscritorio();
+        app.ejecutarPrueba();
     }
 
     private void mostrarDescripcionDelPrograma() {
@@ -157,7 +158,10 @@ public class Busqueda {
         busqueda.setDescripcionPrograma("\n ===== DESCRIPCION DEL PROGRAMA =====\n"
                 + "El programa permite realizar la busqueda de una pelicula, \n"
                 + "seleccionando el tipo de busqueda que queremos realizar(Secuencial o Binaria)");
-
+        
+        PruebaEscritorioBusqueda test = new PruebaEscritorioBusqueda();
+        busqueda.setPruebaEscritorio(test);
+        
         AplicacionBusqueda aplicacion = new AplicacionBusqueda();
         busqueda.setAplicacion(aplicacion);
     }
