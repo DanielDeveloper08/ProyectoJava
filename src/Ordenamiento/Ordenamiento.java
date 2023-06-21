@@ -102,7 +102,8 @@ public class Ordenamiento {
     }
 
     private void mostrarPruebaDeEscritorio() {
-        // AGRGEAR
+        PruebaEscritorioOrdenamiento app = (PruebaEscritorioOrdenamiento) ordenamiento.getPruebaEscritorio();
+        app.ejecutarPrueba();
     }
 
     private void mostrarDescripcionDelPrograma() {
@@ -164,6 +165,9 @@ public class Ordenamiento {
         ordenamiento.setDescripcionPrograma(
                 "\n ===== DESCRIPCION DEL PROGRAMA =====\n"
                 + "El programa permite ordenar una lista de numeros ingresado por teclado por cualquier tipo de ordenamiento.");
+        
+        PruebaEscritorioOrdenamiento test = new PruebaEscritorioOrdenamiento();
+        ordenamiento.setPruebaEscritorio(test);
         AplicacionOrdenamiento aplicacion = new AplicacionOrdenamiento();
         ordenamiento.setAplicacion(aplicacion);
     }
